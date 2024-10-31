@@ -21,6 +21,7 @@ namespace MyGame.Models.Map
                 for (int j = 0; j < HEIGHT; j++)
                 {
                     CubeCoordinate coordinate = new CubeCoordinate(i - j / 2, j);
+                    //coordinate.CalculateNeighbours();
 
                     Tiles.Add(coordinate, new HexTile());
                     Positions.Add(coordinate, CubeCoordinateToScreenPosition(coordinate));

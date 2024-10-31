@@ -1,5 +1,6 @@
 ﻿using MyGame.Models;
 using MyGame.Models.Map;
+using MyGame.Models.Units;
 using System;
 using Tao.Sdl;
 
@@ -43,6 +44,11 @@ namespace MyGame.Views
             Show();
         }
 
+        internal void Render(Unit unit)
+        {
+                Draw(Program.Content.GetImage(unit.Name), unit.Position);
+        }
+
         internal void Render(HexGrid grid)
         {
 
@@ -63,6 +69,9 @@ namespace MyGame.Views
             {
                 CubeCoordinate coordinate = keyValuePair.Key;
                 Image image = keyValuePair.Value;
+
+                if(!Program.Grid.Positions.ContainsKey(coordinate))
+                    continue;
 
                 ScreenPosition screenPosition = Program.Grid.Positions[coordinate];
                 Draw(image, screenPosition);

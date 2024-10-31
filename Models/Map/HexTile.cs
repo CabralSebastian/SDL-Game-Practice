@@ -1,4 +1,5 @@
 ﻿using MyGame.Models.Units;
+using System.Collections.Generic;
 
 namespace MyGame.Models.Map
 {
@@ -9,6 +10,8 @@ namespace MyGame.Models.Map
         internal Unit Unit = null;
 
         internal bool IsFree => Unit != null;
+
+        internal List<CubeCoordinate> PathToReach {  get; set; }
 
         internal void Enter(Unit unit)
         {

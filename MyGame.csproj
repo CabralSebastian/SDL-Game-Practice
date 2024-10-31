@@ -59,6 +59,14 @@
     <Compile Include="Models\ScreenPosition.cs" />
     <Compile Include="Models\Units\Character.cs" />
     <Compile Include="Models\Units\Enemy.cs" />
+    <Compile Include="Models\Units\States\AttackingState.cs" />
+    <Compile Include="Models\Units\States\IdleState.cs" />
+    <Compile Include="Models\Units\States\MovingState.cs" />
+    <Compile Include="Models\Units\States\OnTurnState.cs" />
+    <Compile Include="Models\Units\States\ReadyToAttackState.cs" />
+    <Compile Include="Models\Units\States\ReadyToMoveState.cs" />
+    <Compile Include="Models\Units\States\State.cs" />
+    <Compile Include="Models\Units\States\StateType.cs" />
     <Compile Include="Models\Units\Unit.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -88,6 +96,9 @@
     </Content>
     <Content Include="Assets\Images\highlight_red.png" />
     <Content Include="Assets\Images\highlight_blue.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\Images\triangle.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

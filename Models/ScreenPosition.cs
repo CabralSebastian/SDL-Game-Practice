@@ -4,6 +4,7 @@ namespace MyGame.Models
 {
     struct ScreenPosition
     {
+        const float EPSILON = 0.01f;
         internal float x;
         internal float y;
 
@@ -20,6 +21,11 @@ namespace MyGame.Models
             return (float)Math.Sqrt((double)(diference.x * diference.x + diference.y * diference.y));
         }
 
+        internal bool Equals(ScreenPosition otherPosition)
+        {
+            return Math.Abs(x - otherPosition.x) < EPSILON && Math.Abs(y - otherPosition.y) < EPSILON;
+        }
+
         public static ScreenPosition operator +(ScreenPosition thisPosition, ScreenPosition otherPosition)
         {
             return new ScreenPosition(thisPosition.x + otherPosition.x, thisPosition.y + otherPosition.y);
@@ -28,6 +34,16 @@ namespace MyGame.Models
         public static ScreenPosition operator -(ScreenPosition thisPosition, ScreenPosition otherPosition)
         {
             return new ScreenPosition(thisPosition.x - otherPosition.x, thisPosition.y - otherPosition.y);
+        }
+
+        public static ScreenPosition operator *(ScreenPosition thisPosition, float number)
+        {
+            return new ScreenPosition(thisPosition.x * number, thisPosition.y * number);
+        }
+
+        public static ScreenPosition operator /(ScreenPosition thisPosition, float number)
+        {
+            return new ScreenPosition(thisPosition.x / number, thisPosition.y / number);
         }
     }
 }

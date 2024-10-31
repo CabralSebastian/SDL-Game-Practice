@@ -1,7 +1,9 @@
 ﻿using MyGame.Models;
 using MyGame.Models.Map;
+using MyGame.Models.Units;
 using MyGame.Views;
-using System;
+using System.Diagnostics;
+using System.Timers;
 
 namespace MyGame.Controllers
 {
@@ -9,19 +11,28 @@ namespace MyGame.Controllers
     {
         private readonly HighlightsManager HighlightsManager;
         private readonly HexGrid Grid;
+
+
+        private readonly Stopwatch stopwatch;
+
+        private float deltaTimeSeconds = 0f;
+
         internal GameController(HexGrid grid, HighlightsManager highlightsManager) 
         {
+            stopwatch = new Stopwatch();
             Grid = grid;
             HighlightsManager = highlightsManager;
         }
 
+
         internal void CheckInputs() 
         {
             Program.Mouse.CheckInputs();
+            CubeCoordinate MouseCoordinate = Program.Grid.GetCoordinate(Program.Mouse.Position);
 
             if (Program.Mouse.IsLeftClickDown)
             {
-                HighlightsManager.TurnOnHighlight(Color.Blue, Grid.GetCoordinate(Program.Mouse.Position));
+                Program.Character.Move(MouseCoordinate); 
             }
 
             if (Program.Mouse.IsRightClickDown)
@@ -30,8 +41,10 @@ namespace MyGame.Controllers
 
         internal void Update() 
         {
-            
+            deltaTimeSeconds = stopwatch.ElapsedMilliseconds / 1000f;
+            stopwatch.Restart();
 
+            Program.Character.Update(deltaTimeSeconds);
 
         }
 

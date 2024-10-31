@@ -1,10 +1,11 @@
-﻿using System;
-using Tao.Sdl;
+﻿using Tao.Sdl;
 
 using MyGame.Views;
 using MyGame.Models;
-using MyGame.Controllers;
 using MyGame.Models.Map;
+using MyGame.Models.Units;
+using MyGame.Controllers;
+
 
 namespace MyGame
 {
@@ -21,10 +22,13 @@ namespace MyGame
         internal static Renderer Renderer;
         internal static Content Content;
 
+        /*IN-GAME SCENE*/
         internal static HexGrid Grid;
         internal static HighlightsManager HighlightsManager;
+        internal static Character Character;
 
         internal static Cursor Cursor;
+        /**************/
 
         static void Main(string[] _)
         {
@@ -38,6 +42,10 @@ namespace MyGame
             Grid = new HexGrid();
             HighlightsManager = new HighlightsManager();
 
+            Character = new Character("triangle", 3, new CubeCoordinate(1, 1));
+            Character.StartTurn();
+            Character.PrepareToMove();
+
             GameController = new GameController(Grid, HighlightsManager);
 
             while (IsRunning)
@@ -49,6 +57,8 @@ namespace MyGame
 
                 Renderer.Render(Grid);
                 Renderer.Render(HighlightsManager);
+
+                Renderer.Render(Character);
 
                 Renderer.Render(Cursor);
 
